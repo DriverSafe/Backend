@@ -1,0 +1,9 @@
+{
+	"app": {
+		"port": 3000
+	},
+
+	"db": {
+		"mongoUri": "mongodb://127.0.0.1:27017/DriverSafe"
+	}
+}

@@ -1,0 +1,19 @@
+const express = require("express");
+const config = require("config");
+const mongoose = require("mongoose");
+
+const app = express();
+
+app.use(express.json({ extended: true }));
+
+app.get("/", (req, res) => {
+	res.send("Hello World!");
+});
+
+mongoose.connect(config.get("db.mongoUri")).then(() => {
+	console.log("Connected to MongoDB");
+});
+
+app.listen(config.get("app.port"), () =>
+	console.log(`App has been started on port ${config.get("app.port")}...`)
+);
