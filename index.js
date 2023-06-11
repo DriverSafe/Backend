@@ -4,12 +4,14 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const locationRoutes = require("./routes/locations");
+const stateRoutes = require("./routes/states");
 
 const app = express();
 
 app.use(express.json({ extended: true }));
 app.use(cors());
 app.use("/locations", locationRoutes);
+app.use("/states", stateRoutes);
 
 app.get("/", (req, res) => {
 	res.send("Hello World!");
