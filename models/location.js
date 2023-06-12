@@ -2,12 +2,16 @@ const Joi = require("joi");
 const mongoose = require("mongoose");
 
 const locationSchema = new mongoose.Schema({
-	name: {
-		type: String,
+	lat: {
+		type: Number,
 		required: true,
 	},
-	cordination: {
-		type: String,
+	lng: {
+		type: Number,
+		required: true,
+	},
+	accuracy: {
+		type: Number,
 		required: true,
 	},
 	time: {
@@ -20,8 +24,10 @@ const Location = mongoose.model("Location", locationSchema);
 
 function validateLocation(location) {
 	const schema = Joi.object({
-		name: Joi.string().required(),
-		cordination: Joi.string().required(),
+		lat: Joi.number().required(),
+		lng: Joi.number().required(),
+		accuracy: Joi.number().required(),
+		time: Joi.date(),
 	});
 
 	return schema.validate(location);

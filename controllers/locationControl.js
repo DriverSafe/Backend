@@ -1,7 +1,7 @@
 const { Location, validate } = require("../models/location");
 
 exports.getLocations = async (req, res) => {
-	const locations = await Location.find().sort("name");
+	const locations = await Location.find().sort({ _id: -1 });
 	res.send(locations);
 };
 
@@ -20,8 +20,9 @@ exports.createLocation = async (req, res) => {
 	if (error) return res.status(400).send(error.details[0].message);
 
 	let location = new Location({
-		name: req.body.name,
-		cordination: req.body.cordination,
+		lat: req.body.lat,
+		lng: req.body.lng,
+		accuracy: req.body.accuracy,
 	});
 
 	location = await location.save();
@@ -36,8 +37,9 @@ exports.updateLocation = async (req, res) => {
 	const location = await Location.findByIdAndUpdate(
 		req.params.id,
 		{
-			name: req.body.name,
-			cordination: req.body.cordination,
+			lat: req.body.lat,
+			lng: req.body.lng,
+			accuracy: req.body.accuracy,
 		},
 		{ new: true }
 	);
