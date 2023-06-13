@@ -1,7 +1,7 @@
 const { State, validate } = require("../models/state");
 
 exports.getStates = async (req, res) => {
-	const states = await State.find();
+	const states = await State.find().sort({ _id: -1 });
 	res.send(states);
 };
 
@@ -19,7 +19,7 @@ exports.createState = async (req, res) => {
 
 	let state = new State({
 		speed: req.body.speed,
-		distance: req.body.distance,
+		state: req.body.state,
 	});
 
 	state = await state.save();
@@ -35,7 +35,7 @@ exports.updateState = async (req, res) => {
 		req.params.id,
 		{
 			speed: req.body.speed,
-			distance: req.body.distance,
+			state: req.body.state,
 		},
 		{ new: true }
 	);

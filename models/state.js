@@ -8,8 +8,8 @@ const stateSchema = new mongoose.Schema({
 		required: true,
 	},
 
-	distance: {
-		type: Number,
+	state: {
+		type: String,
 		required: true,
 	},
 
@@ -24,7 +24,7 @@ const State = mongoose.model("State", stateSchema);
 function validateState(state) {
 	const schema = Joi.object({
 		speed: Joi.number().required(),
-		distance: Joi.number().required(),
+		state: Joi.string().required(),
 	});
 
 	return schema.validate(state);
