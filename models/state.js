@@ -1,5 +1,6 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
+const moment = require("moment-timezone");
 
 const stateSchema = new mongoose.Schema({
 	speed: {
@@ -14,7 +15,7 @@ const stateSchema = new mongoose.Schema({
 
 	time: {
 		type: Date,
-		default: () => new Date(Date.now() + 5.5 * 60 * 60 * 1000),
+		default: () => moment().tz("Asia/Kolkata").toDate(),
 	},
 });
 
