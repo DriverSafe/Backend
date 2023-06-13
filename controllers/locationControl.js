@@ -62,3 +62,14 @@ exports.deleteLocation = async (req, res) => {
 
 	res.send(location);
 };
+
+exports.deleteAllLocations = async (req, res) => {
+	const location = await Location.deleteMany();
+
+	if (!location)
+		return res
+			.status(404)
+			.send("The location with the given ID was not found.");
+
+	res.send(location);
+};

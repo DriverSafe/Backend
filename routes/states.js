@@ -8,5 +8,6 @@ router.get("/:id", stateController.getState);
 router.post("/", stateController.createState);
 router.put("/:id", stateController.updateState);
 router.delete("/:id", stateController.deleteState);
+router.delete("/", stateController.deleteAllStates);
 
 module.exports = router;

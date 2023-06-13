@@ -54,3 +54,12 @@ exports.deleteState = async (req, res) => {
 
 	res.send(state);
 };
+
+exports.deleteAllStates = async (req, res) => {
+	const states = await State.deleteMany();
+
+	if (!states)
+		return res.status(404).send("The states with the given ID was not found.");
+
+	res.send(states);
+};
