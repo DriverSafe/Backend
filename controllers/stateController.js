@@ -1,3 +1,4 @@
+const config = require("config");
 const { State, validate } = require("../models/state");
 
 exports.getStates = async (req, res) => {
@@ -16,6 +17,13 @@ exports.createState = async (req, res) => {
 	const { error } = validate(req.body);
 
 	if (error) return res.status(400).send(error.details[0].message);
+
+	const requestCount = await State.countDocuments();
+
+	if (requestCount >= config.get("maxRequestsStored")) {
+		const oldestState = await State.findOne().sort({ _id: 1 });
+		await State.findByIdAndRemove(oldestState._id);
+	}
 
 	let state = new State({
 		speed: req.body.speed,
